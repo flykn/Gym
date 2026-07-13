@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2563eb">
+    <title>GymTracker — Дневник тренировок</title>
+
+    <!-- PWA: подключение манифеста -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <h1>🏋️ GymTracker</h1>
+    </header>
+
+    <!-- Навигация по вкладкам -->
+    <nav class="tabs">
+        <button class="tab-btn active" data-tab="machines">Тренажеры</button>
+        <button class="tab-btn" data-tab="diary">Дневник</button>
+    </nav>
+
+    <main class="container">
+
+        <!-- ===== ВКЛАДКА: ТРЕНАЖЕРЫ ===== -->
+        <section id="machines" class="tab-content active">
+            <div class="section-head">
+                <h2>Тренажеры</h2>
+                <button class="btn primary" id="addMachineBtn">+ Добавить</button>
+            </div>
+
+            <div id="machinesList" class="cards-grid">
+                <!-- Карточки тренажеров рендерятся здесь -->
+            </div>
+        </section>
+
+        <!-- ===== ВКЛАДКА: ДНЕВНИК ===== -->
+        <section id="diary" class="tab-content">
+            <div class="section-head">
+                <h2>Дневник тренировок</h2>
+                <button class="btn primary" id="addWorkoutBtn">+ Записать</button>
+            </div>
+
+            <div id="diaryList" class="diary-list">
+                <!-- Записи дневника рендерятся здесь -->
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== МОДАЛКА: тренажер ===== -->
+    <div class="modal-overlay" id="machineModal">
+        <div class="modal">
+            <h3>Новый тренажер</h3>
+            <form id="machineForm">
+                <label>Название
+                    <input type="text" name="name" required placeholder="Например: Жим ногами">
+                </label>
+
+                <label>Фото
+                    <input type="file" name="photoFile" accept="image/*" id="photoFile">
+                </label>
+                <input type="text" name="photoUrl" placeholder="или вставьте URL фото" id="photoUrl">
+                <img id="photoPreview" class="photo-preview hidden" alt="Превью">
+
+                <div class="row">
+                    <label>Повторения
+                        <input type="number" name="reps" min="0" placeholder="12">
+                    </label>
+                    <label>Вес (кг)
+                        <input type="number" name="weight" min="0" step="0.5" placeholder="50">
+                    </label>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn ghost" data-close>Отмена</button>
+                    <button type="submit" class="btn primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== МОДАЛКА: запись в дневник ===== -->
+    <div class="modal-overlay" id="workoutModal">
+        <div class="modal">
+            <h3>Запись тренировки</h3>
+            <form id="workoutForm">
+                <label>Дата
+                    <input type="date" name="date" required id="workoutDate">
+                </label>
+
+                <label>Упражнение (из списка)
+                    <select name="machineSelect" id="machineSelect">
+                        <option value="">— выбрать из тренажеров —</option>
+                    </select>
+                </label>
+
+                <label>или введите вручную
+                    <input type="text" name="manualName" placeholder="Название упражнения">
+                </label>
+
+                <div class="row">
+                    <label>Повторения
+                        <input type="number" name="reps" min="0" required placeholder="10">
+                    </label>
+                    <label>Вес (кг)
+                        <input type="number" name="weight" min="0" step="0.5" placeholder="40">
+                    </label>
+                    <label>Подходы
+                        <input type="number" name="sets" min="1" value="1">
+                    </label>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn ghost" data-close>Отмена</button>
+                    <button type="submit" class="btn primary">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
